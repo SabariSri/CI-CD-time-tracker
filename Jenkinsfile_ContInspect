@@ -11,17 +11,17 @@ pipeline {
         git branch: 'main', credentialsId: '34b78ab1-3895-4887-8e03-af7a26a8186a', url: 'https://github.com/SabariSri/CI-CD-Pipeline'
       }
     }
-    stage('Test') {
-      steps {
-        sh 'mvn test'
+  stage('Compile') {
+     steps {
+        echo 'This will Compile'
+        sh 'mvn clean compile'
       }
     }
     stage('Package') {
       steps {
-        sh 'mvn clean package findbugs:findbugs pmd:pmd checkstyle:checkstyle'
+        sh 'mvn package findbugs:findbugs pmd:pmd checkstyle:checkstyle'
       }
-    }
-    
+    }    
     stage('Static Code Anlaysis') {
       steps {
         recordIssues healthy: 40, qualityGates: [[threshold: 100, type: 'TOTAL', unstable: false], [threshold: 40, type: 'TOTAL', unstable: true]], tools: [findBugs(useRankAsPriority: true), pmdParser(), checkStyle()], unhealthy: 80
