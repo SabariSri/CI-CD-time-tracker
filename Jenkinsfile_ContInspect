@@ -18,8 +18,14 @@ pipeline {
     }
     stage('Package') {
       steps {
-        sh 'mvn package'
+        sh 'mvn package findbugs:findbugs pmd:pmd checkstyle:checkstyle'
       }
+    }
+    
+    stage('Static Code Anlaysis') {
+      steps {
+        recordIssues(tools: [findBugs(useRankAsPriority: true), pmdParser(), checkStyle()])
+     }
     }
     stage('Results') {
       steps {
