@@ -19,7 +19,7 @@ pipeline {
     }
     stage('Package') {
       steps {
-        sh 'mvn package findbugs:findbugs pmd:pmd checkstyle:checkstyle'
+        sh 'mvn package checkstyle:checkstyle findbugs:findbugs pmd:pmd'
       }
     }    
     stage('Static Code Anlaysis') {
