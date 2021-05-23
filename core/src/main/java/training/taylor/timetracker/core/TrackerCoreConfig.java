@@ -15,8 +15,22 @@ import java.util.List;
 @ComponentScan("training.taylor.timetracker.core")
 public class TrackerCoreConfig {
 
-    @Bean(name = "timesheet")
-    public List<TimeEntry> timeEntries() {
-        return new ArrayList<>();
-    }
+	@Bean(name = "timesheet")
+	public List<TimeEntry> timeEntries() {
+		return new ArrayList<>();
+	}
+
+	public void dummyMethod() {
+		boolean flag = false;
+		if (flag = true)
+			 System.out.println("True");
+	}
+	
+	public void dummyMethod2() {
+		boolean flag = false;
+		if (flag = true)
+			 System.out.println("True");
+	}
+
+
 }
