@@ -18,13 +18,13 @@ pipeline {
     }
     stage('Package') {
       steps {
-        sh 'mvn package'
+        sh 'mvn clean package findbugs:findbugs pmd:pmd checkstyle:checkstyle'
       }
     }
     
     stage('Static Code Anlaysis') {
       steps {
-        recordIssues(tools: [findBugs(useRankAsPriority: true), pmdParser(), checkStyle()])
+        recordIssues healthy: 40, qualityGates: [[threshold: 100, type: 'TOTAL', unstable: false], [threshold: 40, type: 'TOTAL', unstable: true]], tools: [findBugs(useRankAsPriority: true), pmdParser(), checkStyle()], unhealthy: 80
      }
     }
     stage('Results') {
