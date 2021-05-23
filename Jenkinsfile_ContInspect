@@ -37,7 +37,7 @@ pipeline {
       steps {
         nexusPublisher nexusInstanceId: 'nexus-on-epam-ubuntu', nexusRepositoryId: 'jenkins-ci-mvn-nexus-repo', packages: [
           [$class: 'MavenPackage', mavenAssetList: [
-            [classifier: '', extension: '', filePath: 'webapp/target/webapp.war']
+            [classifier: '', extension: '', filePath: 'web/target/time-tracker-web-0.5.0-SNAPSHOT.war']
           ], mavenCoordinate: [artifactId: 'webapp', groupId: 'com.company', packaging: 'war', version: '4.0']]
         ]
       }
